@@ -53,12 +53,9 @@ public class ZkDistributedLock {
 
   /**
    * try acquire
-   * @param key
-   * @param time
-   * @param unit
    * @throws Exception
    */
-  public static boolean acquire(String key,long time, TimeUnit unit) {
+  public static boolean acquire() {
     try {
       //判断根节点
       checkRootNode();
@@ -106,10 +103,9 @@ public class ZkDistributedLock {
 
   /**
    * try release
-   * @param key
    * @throws Exception
    */
-  public static boolean release(String key) throws Exception {
+  public static boolean release() {
     try {
       //删除当前子节点
       zookeeper.delete(currentLockId,-1);

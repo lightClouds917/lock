@@ -1,7 +1,6 @@
-package com.java4all.distributed.CuratorLock;
+package com.java4all.distributed.curatorLock;
 
 import com.java4all.distributed.constant.ZookeeperProperties;
-import com.java4all.distributed.zklock.ZkClient;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import org.apache.curator.RetryPolicy;
