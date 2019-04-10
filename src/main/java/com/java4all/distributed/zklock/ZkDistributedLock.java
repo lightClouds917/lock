@@ -3,7 +3,6 @@ package com.java4all.distributed.zklock;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -23,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class ZkDistributedLock {
 
   private static  final Logger logger = LoggerFactory.getLogger(ZkDistributedLock.class);
-  private static ZooKeeper zookeeper = null;
+  public static ZooKeeper zookeeper = null;
 
   private static final String ROOT_NODE_LOCK = "/ROOT_LOCK";
   private static String currentLockId;
@@ -33,8 +32,8 @@ public class ZkDistributedLock {
 
   //TODO 这里单例session还是？
   static {
-    ZkClient zkClient = ZkClient.getInstance();
-    zookeeper = zkClient.getClient();
+    ZookeeperClient zookeeperClient = ZookeeperClient.getInstance();
+    zookeeper = zookeeperClient.getClient();
   }
 
 

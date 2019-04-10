@@ -4,8 +4,6 @@ import com.java4all.distributed.dao.ProductStockDao;
 import com.java4all.distributed.entity.ProductStock;
 import com.java4all.distributed.service.ProductStockService;
 import com.java4all.distributed.zklock.ZkDistributedLock;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
