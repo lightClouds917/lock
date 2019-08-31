@@ -1,10 +1,8 @@
 package com.java4all.distributed.zklock;
 
 import com.java4all.distributed.constant.ZookeeperProperties;
-import com.java4all.distributed.entity.ProductStock;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
-import javax.annotation.Resource;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
@@ -12,9 +10,9 @@ import org.apache.zookeeper.ZooKeeper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
+ * no use
  * description:
  * zookeeper client
  * @author wangzhongxiang

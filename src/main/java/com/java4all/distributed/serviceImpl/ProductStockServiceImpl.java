@@ -18,7 +18,8 @@ public class ProductStockServiceImpl implements ProductStockService {
 
   @Autowired
   private ProductStockDao productStockDao;
-
+  @Autowired
+  private ZkDistributedLock lock;
 
   @Override
   public ProductStock getById(Integer id) {
@@ -55,7 +56,7 @@ public class ProductStockServiceImpl implements ProductStockService {
    */
   @Override
   public void updateStockById3(Integer id, Integer stock) {
-    boolean acquire = ZkDistributedLock.acquire();
+    boolean acquire = lock.acquire();
     if(acquire){
       try {
         ProductStock product = productStockDao.getById(id);
@@ -66,7 +67,7 @@ public class ProductStockServiceImpl implements ProductStockService {
       }catch (Exception ex){
         ex.printStackTrace();
       }finally {
-        ZkDistributedLock.release();
+        lock.release();
       }
     }
   }
