@@ -34,7 +34,6 @@ public class ZookeeperClient {
     if(null == zookeeperClient){
       synchronized (ZookeeperClient.class){
         if(null == zookeeperClient){
-          ProductStock productStock = new ProductStock();
           zookeeperClient = new ZookeeperClient();
           System.out.println("锚点一----------------");
         }
