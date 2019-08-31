@@ -12,6 +12,7 @@ import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 /**
  * description:
@@ -21,9 +22,10 @@ import org.slf4j.LoggerFactory;
  */
 public class ZkDistributedLock {
 
-  private static  final Logger logger = LoggerFactory.getLogger(ZkDistributedLock.class);
+  private static final Logger logger = LoggerFactory.getLogger(ZkDistributedLock.class);
   public static ZooKeeper zookeeper = null;
 
+  private static final ThreadLocal<String> threadLocal = new ThreadLocal();
   private static final String ROOT_NODE_LOCK = "/ROOT_LOCK";
   private static String currentLockId;
   private static final String DATA = "node";
@@ -46,7 +48,7 @@ public class ZkDistributedLock {
             Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
       }
     }catch (Exception ex){
-      logger.info("【Zookeeper】Failed to create root node",ex);
+      logger.info("【Zookeeper】Failed to create root node {} :",ROOT_NODE_LOCK,ex);
     }
   }
 
@@ -70,6 +72,7 @@ public class ZkDistributedLock {
       String firstNode = children.get(0);
       //当前节点
       String currentNode = currentLockId.substring(currentLockId.lastIndexOf("/") + 1);
+      threadLocal.set(currentLockId);
       //如果当前节点是第一个子节点  加锁成功
       if (currentNode.equals(firstNode)) {
         return true;
@@ -94,7 +97,7 @@ public class ZkDistributedLock {
         return true;
       }
     }catch (Exception ex){
-      logger.info("【Zookeeper】Failed to acquire lock:",ex);
+      logger.info("【Zookeeper】Failed to acquire lock {} ",currentLockId,ex);
     }
     return false;
   }
@@ -107,7 +110,9 @@ public class ZkDistributedLock {
   public static boolean release() {
     try {
       //删除当前子节点
-      zookeeper.delete(currentLockId,-1);
+      if(!StringUtils.isEmpty(threadLocal.get())){
+        zookeeper.delete(threadLocal.get(),-1);
+      }
       return true;
     }catch (Exception ex){
       logger.info("【Zookeeper】Failed to release lock:",ex);
