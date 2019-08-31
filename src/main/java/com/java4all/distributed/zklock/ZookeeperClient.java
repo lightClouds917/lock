@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 public class ZookeeperClient {
 
   @Autowired
-  private ZookeeperProperties zookeeperProperties;
+  public ZookeeperProperties zookeeperProperties;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ZookeeperClient.class);
   public static volatile ZookeeperClient zookeeperClient;
