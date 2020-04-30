@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ * no use
  * description:
  * zookeeper client
  * @author wangzhongxiang
@@ -20,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ZookeeperClient {
 
   @Autowired
-  private ZookeeperProperties zookeeperProperties;
+  public ZookeeperProperties zookeeperProperties;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ZookeeperClient.class);
   public static volatile ZookeeperClient zookeeperClient;

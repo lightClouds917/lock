@@ -11,6 +11,6 @@
         SELECT * from product_stock where id = #{id}
     </select>
     <update id="updateStockById">
-        UPDATE product_stock set stock = #{arg1} where id = #{arg0};
+        UPDATE product_stock set stock = #{stock} where id = #{id};
     </update>
 </mapper>
